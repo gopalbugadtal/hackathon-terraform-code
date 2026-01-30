@@ -10,9 +10,9 @@ ec2_root_volume_type      = "gp3"
 # RDS Configuration
 rds_instance_type         = "db.t4g.small"
 rds_engine                = "mysql"
-rds_database_name         = "artificial-instinct-db"
+rds_database_name         = "artificial_instinct_db"
 rds_master_username       = "admin"
-rds_master_password       = "root"
+rds_master_password       = "root1234"
 rds_allocated_storage     = 10
 rds_multi_az              = false
 rds_skip_final_snapshot   = true

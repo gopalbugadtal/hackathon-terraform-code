@@ -63,52 +63,6 @@ resource "aws_lb_listener" "http" {
   }
 }
 
-# HTTPS Listener - Placeholder (requires certificate)
-resource "aws_lb_listener" "https" {
-  load_balancer_arn = aws_lb.main.arn
-  port              = "443"
-  protocol          = "HTTPS"
-  ssl_policy        = "ELBSecurityPolicy-TLS-1-2-2017-01"
-  certificate_arn   = aws_acm_certificate.main.arn
-
-  default_action {
-    type             = "forward"
-    target_group_arn = aws_lb_target_group.main.arn
-  }
-}
-
-# Self-signed certificate for HTTPS (for testing purposes)
-resource "tls_private_key" "main" {
-  algorithm = "RSA"
-  rsa_bits  = 2048
-}
-
-resource "tls_self_signed_cert" "main" {
-  private_key_pem = tls_private_key.main.private_key_pem
-
-  subject {
-    common_name  = "artificial-instinct.local"
-    organization = "Artificial Instinct"
-  }
-
-  validity_period_hours = 8760
-
-  allowed_uses = [
-    "key_encipherment",
-    "digital_signature",
-    "server_auth",
-  ]
-}
-
-resource "aws_acm_certificate" "main" {
-  private_key      = tls_private_key.main.private_key_pem
-  certificate_body = tls_self_signed_cert.main.cert_pem
-
-  tags = {
-    Name = "Artificial-Instinct"
-  }
-}
-
 # Data source to get default VPC
 data "aws_vpc" "default" {
   default = true

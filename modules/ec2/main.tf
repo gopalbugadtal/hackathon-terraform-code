@@ -1,24 +1,24 @@
 # Data source to get the latest Amazon Linux 2 AMI
-data "aws_ami" "amazon_linux_2" {
-  most_recent = true
-  owners      = ["amazon"]
+# data "aws_ami" "amazon_linux_2" {
+#   most_recent = true
+#   owners      = ["amazon"]
 
-  filter {
-    name   = "name"
-    values = ["amzn2-ami-hvm-*-x86_64-gp2"]
-  }
+#   filter {
+#     name   = "name"
+#     values = ["amzn2-ami-hvm-*-x86_64-gp2"]
+#   }
 
-  filter {
-    name   = "virtualization-type"
-    values = ["hvm"]
-  }
-}
+#   filter {
+#     name   = "virtualization-type"
+#     values = ["hvm"]
+#   }
+# }
 
 resource "aws_instance" "main" {
-  ami                         = data.aws_ami.amazon_linux_2.id
+  ami                         = var.ami_id
   instance_type               = var.instance_type
   key_name                    = var.key_name
-  security_groups             = var.security_group_ids
+  vpc_security_group_ids      = var.security_group_ids
   associate_public_ip_address = var.associate_public_ip_address
 
   root_block_device {

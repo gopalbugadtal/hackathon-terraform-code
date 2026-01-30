@@ -15,5 +15,5 @@ output "instance_private_ip" {
 
 output "ami_id" {
   description = "AMI ID used"
-  value       = data.aws_ami.amazon_linux_2.id
+  value       = var.ami_id
 }

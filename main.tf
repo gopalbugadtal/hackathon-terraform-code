@@ -17,7 +17,7 @@ module "security_group" {
 module "ec2" {
   source = "./modules/ec2"
 
-  ami_id                      = "ami-0c94855ba95c574c8" # Amazon Linux 2 in ap-south-1 (replace with latest)
+  ami_id                      = "ami-0f0613925dab57b30"
   instance_type               = var.ec2_instance_type
   key_name                    = var.ec2_key_name
   security_group_ids          = [module.security_group.security_group_id]
@@ -81,10 +81,9 @@ module "ecr" {
   image_expiration_days  = 30
 }
 
-# ALB Module
+#ALB Module
 module "alb" {
   source = "./modules/alb"
-
   alb_name               = var.alb_name
   load_balancer_type     = "application"
   internal               = false
