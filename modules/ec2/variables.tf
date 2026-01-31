@@ -43,3 +43,15 @@ variable "instance_name" {
   type        = string
   default     = "artificial-instinct-ec2"
 }
+
+variable "user_data" {
+  description = "User data script for EC2 instance"
+  type        = string
+  default     = ""
+}
+
+variable "iam_instance_profile_name" {
+  description = "IAM instance profile name for EC2"
+  type        = string
+  default     = ""
+}

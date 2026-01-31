@@ -61,6 +61,10 @@ resource "aws_lb_listener" "http" {
     type             = "forward"
     target_group_arn = aws_lb_target_group.main.arn
   }
+
+  tags = {
+    Name = "Artificial-Instinct"
+  }
 }
 
 # Data source to get default VPC
