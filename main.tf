@@ -57,16 +57,16 @@ module "iam" {
 }
 
 #ALB Module
-# module "alb" {
-#   source = "./modules/alb"
-#   alb_name               = var.alb_name
-#   load_balancer_type     = "application"
-#   internal               = false
-#   security_group_ids     = [module.security_group.security_group_id]
-#   subnets                = [] # Handled by module with data source
-#   enable_deletion_protection = var.alb_enable_deletion_protection
-#   enable_http2           = true
-#   enable_cross_zone_load_balancing = true
-#   instance_id            = module.ec2.instance_id
-#   target_port            = 80
-# }
+module "alb" {
+  source = "./modules/alb"
+  alb_name               = var.alb_name
+  load_balancer_type     = "application"
+  internal               = false
+  security_group_ids     = [module.security_group.security_group_id]
+  subnets                = [] # Handled by module with data source
+  enable_deletion_protection = var.alb_enable_deletion_protection
+  enable_http2           = true
+  enable_cross_zone_load_balancing = true
+  instance_id            = module.ec2.instance_id
+  target_port            = 80
+}
